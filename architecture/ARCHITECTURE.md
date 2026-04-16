@@ -8,6 +8,10 @@ This document explains how each learner-facing capability is wired, in one block
 
 ## The single block diagram
 
+![Saras architecture — one block, six color-coded flows](./images/architecture.png)
+
+<sub>High-res: [`images/architecture.png`](./images/architecture.png) (6368×1830 px) · Vector: [`images/architecture.svg`](./images/architecture.svg) · Source: [`diagram.mmd`](./diagram.mmd)</sub>
+
 ```mermaid
 flowchart TB
     %% ---------- Entry ----------

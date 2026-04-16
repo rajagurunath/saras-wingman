@@ -1,0 +1,78 @@
+flowchart TB
+    %% ---------- Entry ----------
+    U([Learner — WhatsApp / Telegram]):::entry
+
+    %% ---------- Wingman core ----------
+    subgraph CORE["Wingman Runtime"]
+      direction TB
+      WG["Wingman Agent Loop"]:::core
+      SK[["Saras SKILL.md<br/>(system prompt)"]]:::core
+      RT{"Intent Router"}:::core
+      MEM[("Learner Memory Profile")]:::core
+      BE[("Backend Events Store")]:::core
+      WIKI[("karpathy-llm-wiki<br/>personal KB")]:::core
+    end
+
+    U -->|message / voice / schedule| WG
+    WG --> SK
+    SK --> RT
+    RT <--> MEM
+    RT <--> WIKI
+
+    %% ---------- Flow 1 : Voice-note pipeline (BLUE) ----------
+    RT -->|voice note in| STT["elevenlabs_cli.py stt --json<br/>transcript + word timings"]:::voice
+    STT --> SCORE["Word-level Pronunciation Scoring"]:::voice
+    SCORE --> FB["Focused Feedback Composer"]:::voice
+    FB --> TTSv["elevenlabs_cli.py tts<br/>native target-language voice"]:::voice
+    TTSv -->|audio reply + text| U
+    SCORE --> BE
+
+    %% ---------- Flow 2 : Audio-only explanation (GREEN) ----------
+    RT -->|how do you say X?| TTSa["elevenlabs_cli.py tts"]:::audio
+    TTSa -->|mp3 voice note| U
+
+    %% ---------- Flow 3 : Anki card = image + word + audio (PINK) ----------
+    RT -->|quiz / drill / review| ANKI["SM-2 Scheduler"]:::card
+    ANKI --> COMP["Word + Example Composer"]:::card
+    COMP --> IMGc["Image Fetch<br/>Unsplash / Pexels / Wikimedia"]:::card
+    COMP --> TTSc["elevenlabs_cli.py tts"]:::card
+    IMGc --> CARD["Card Builder<br/>image + word + example + TTS"]:::card
+    TTSc --> CARD
+    CARD -->|one card per message| U
+    U -.->|Again / Hard / Good / Easy| ANKI
+    ANKI --> BE
+
+    %% ---------- Flow 4 : Vocab video = images + audio (ORANGE) ----------
+    RT -->|teach new words| VB["Vocab Video Builder"]:::imgvid
+    VB --> COMP
+    VB --> IMGv["Image Fetch — 1 per word"]:::imgvid
+    VB --> TTSvv["elevenlabs_cli.py tts narration"]:::imgvid
+    IMGv --> REMv["Remotion Renderer<br/>still-scene montage"]:::imgvid
+    TTSvv --> REMv
+    REMv -->|mp4 15–25s 9:16| U
+
+    %% ---------- Flow 5 : Full Remotion video = animation + audio (PURPLE) ----------
+    RT -->|show me / concept| SCRIPT["Script Planner"]:::rem
+    SCRIPT --> IMGr["Image / asset fetch"]:::rem
+    SCRIPT --> TTSr["elevenlabs_cli.py tts"]:::rem
+    SCRIPT --> REM["Remotion Renderer<br/>animated React composition"]:::rem
+    IMGr --> REM
+    TTSr --> REM
+    REM -->|mp4| U
+
+    %% ---------- Flow 6 : Scheduling (AMBER) ----------
+    RT -->|daily at 9pm / schedule| SCHED["Scheduled Job Creator"]:::sch
+    SCHED --> BE
+    CRON(["Wingman Cron / Trigger"]):::sch --> FIRE["Job Fire Handler"]:::sch
+    FIRE --> RT
+    FIRE --> BE
+
+    %% ---------- Color classes ----------
+    classDef entry  fill:#111827,stroke:#111827,color:#ffffff
+    classDef core   fill:#f3f4f6,stroke:#374151,color:#111827
+    classDef voice  fill:#dbeafe,stroke:#2563eb,color:#1e3a8a
+    classDef audio  fill:#dcfce7,stroke:#16a34a,color:#14532d
+    classDef card   fill:#fce7f3,stroke:#db2777,color:#831843
+    classDef imgvid fill:#ffedd5,stroke:#ea580c,color:#7c2d12
+    classDef rem    fill:#ede9fe,stroke:#7c3aed,color:#4c1d95
+    classDef sch    fill:#fef9c3,stroke:#ca8a04,color:#713f12

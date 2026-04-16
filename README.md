@@ -32,6 +32,8 @@ Saras is a **speaking-first** language coach delivered through the chat app you 
 
 One block diagram, six color-coded flows, all running on the Wingman agent loop.
 
+![Saras architecture — one block, six color-coded flows](./architecture/images/architecture.png)
+
 | Color | Flow | Trigger |
 |---|---|---|
 | 🟦 Blue | Voice-note pipeline (STT → scoring → TTS) | Learner sends a voice note |
