@@ -9,9 +9,15 @@
 
 ## 🎬 Demo
 
-[![Watch the Saras demo on Loom](https://cdn.loom.com/sessions/thumbnails/4807b50097b84e46b061e06faf92a933-with-play.gif)](https://www.loom.com/share/4807b50097b84e46b061e06faf92a933)
+<p align="center">
+  <a href="https://www.loom.com/share/4807b50097b84e46b061e06faf92a933">
+    <img src="./architecture/images/demo-thumbnail.svg" alt="Watch the Saras demo on Loom" width="720"/>
+  </a>
+</p>
 
-<sub>▶ Click the GIF above to watch the full demo on Loom.</sub>
+<p align="center">
+  ▶ <a href="https://www.loom.com/share/4807b50097b84e46b061e06faf92a933"><strong>Watch the demo on Loom</strong></a>
+</p>
 
 ---
 
