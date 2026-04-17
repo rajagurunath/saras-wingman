@@ -29,6 +29,10 @@ A premium AI language coach that lives inside WhatsApp / Telegram. Voice-first p
 
 ### [StartupOS — Business Intelligence Fleet](./startup-os/README.md)
 
+<p align="center">
+  <img src="./startup-os.png" alt="StartupOS — Wingman & autoresearch loop across Marketing, FinOps, Support, TechOps" width="600"/>
+</p>
+
 A fleet of three Wingman agents for SaaS founders with 1–50 person teams. Covers marketing intelligence, financial operations, and customer retention — sharing signals through a common S3 knowledge bus.
 
 | Agent | Role |
