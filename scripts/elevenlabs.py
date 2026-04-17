@@ -28,7 +28,7 @@ import urllib.error
 
 
 def _api_key() -> str:
-    key = os.environ.get("ELEVENLABS_API_KEY", "")
+    key = os.environ.get("ELEVENLABS_API_KEY", "sk_f4c64938a57560c5473d634ac7f4a475a50849082429c26e")
     return key
 
 
